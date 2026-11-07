@@ -1,0 +1,165 @@
+{
+ "2026-11-07": {
+  "ibex": {
+   "al_alza": 11,
+   "avisos": [],
+   "bajan": [
+    [
+     "Acerinox",
+     -3.55
+    ],
+    [
+     "Fluidra",
+     -2.28
+    ],
+    [
+     "Mapfre",
+     -1.85
+    ]
+   ],
+   "fecha_cierre": "2026-11-06",
+   "frase": "Sesión negativa: 11 de 35 valores cerraron al alza y Acerinox (-3,55%) fue el más castigado.",
+   "nivel": 19369.5,
+   "suben": [
+    [
+     "Solaria",
+     3.56
+    ],
+    [
+     "Acciona Energía",
+     3.36
+    ],
+    [
+     "Merlin Properties",
+     2.84
+    ]
+   ],
+   "valores": 35,
+   "var_pct": -0.598
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-06",
+   "frase": "Sesión de ligeras caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4739.9,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.426
+  },
+  "ndx": {
+   "al_alza": 48,
+   "avisos": [],
+   "bajan": [
+    [
+     "Axon Enterprise",
+     -18.18
+    ],
+    [
+     "Microchip Technology",
+     -10.02
+    ],
+    [
+     "Dexcom",
+     -5.98
+    ]
+   ],
+   "fecha_cierre": "2026-11-06",
+   "frase": "Sesión positiva: 48 de 101 valores cerraron al alza y Rocket Lab Corporation (+15,39%) fue el que más subió.",
+   "nivel": 26989.99,
+   "suben": [
+    [
+     "Rocket Lab Corporation",
+     15.39
+    ],
+    [
+     "Airbnb",
+     11.67
+    ],
+    [
+     "Advanced Micro Devices",
+     11.04
+    ]
+   ],
+   "valores": 101,
+   "var_pct": 1.353
+  },
+  "spx": {
+   "al_alza": 184,
+   "avisos": [],
+   "bajan": [
+    [
+     "Axon Enterprise",
+     -18.18
+    ],
+    [
+     "Microchip Technology",
+     -10.02
+    ],
+    [
+     "Charter Communications",
+     -6.19
+    ]
+   ],
+   "fecha_cierre": "2026-11-06",
+   "frase": "Sesión de ligeras subidas: 184 de 503 valores cerraron al alza y Coherent Corp. (+13,58%) fue el que más subió.",
+   "nivel": 7376.86,
+   "suben": [
+    [
+     "Coherent Corp.",
+     13.58
+    ],
+    [
+     "Airbnb",
+     11.67
+    ],
+    [
+     "Advanced Micro Devices",
+     11.04
+    ]
+   ],
+   "valores": 503,
+   "var_pct": 0.315
+  },
+  "sx5e": {
+   "al_alza": 9,
+   "avisos": [],
+   "bajan": [
+    [
+     "Munich Re",
+     -4.27
+    ],
+    [
+     "Deutsche Post",
+     -3.91
+    ],
+    [
+     "Siemens",
+     -3.51
+    ]
+   ],
+   "fecha_cierre": "2026-11-06",
+   "frase": "Sesión negativa: 9 de 50 valores cerraron al alza y Munich Re (-4,27%) fue el más castigado.",
+   "nivel": 6170.49,
+   "suben": [
+    [
+     "Siemens Energy",
+     3.74
+    ],
+    [
+     "ASML Holding",
+     2.69
+    ],
+    [
+     "Nokia",
+     1.99
+    ]
+   ],
+   "valores": 50,
+   "var_pct": -0.98
+  }
+ }
+}

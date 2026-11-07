@@ -1,0 +1,101 @@
+name: Mercados diarios
+
+on:
+  schedule:
+    # GitHub usa hora UTC: se programan las dos y el primer paso deja pasar
+    # solo la que corresponde a las 08:00 de Madrid (verano UTC+2 / invierno UTC+1).
+    - cron: '0 6 * * 1-5'
+    - cron: '0 7 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: mercados-diarios
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - name: Comprobar que son las 08:00 en Madrid
+        id: hora
+        run: |
+          SEGUIR=si
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            OFFSET=$(TZ=Europe/Madrid date +%z)
+            if [ "$OFFSET" = "+0200" ] && [ "${{ github.event.schedule }}" != "0 6 * * 1-5" ]; then SEGUIR=no; fi
+            if [ "$OFFSET" = "+0100" ] && [ "${{ github.event.schedule }}" != "0 7 * * 1-5" ]; then SEGUIR=no; fi
+          fi
+          echo "Madrid: $(TZ=Europe/Madrid date) -> seguir=$SEGUIR"
+          echo "seguir=$SEGUIR" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.hora.outputs.seguir == 'si'
+
+      - uses: actions/setup-python@v5
+        if: steps.hora.outputs.seguir == 'si'
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements-mercados.txt
+
+      - name: Instalar dependencias
+        if: steps.hora.outputs.seguir == 'si'
+        run: pip install -r scripts/requirements-mercados.txt
+
+      - name: Reporte diario y email
+        if: steps.hora.outputs.seguir == 'si'
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_DESTINATARIO: ${{ secrets.EMAIL_DESTINATARIO }}
+          PANEL_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: python scripts/reporte_mercados.py
+
+      # Los pasos siguientes se ejecutan aunque falle el email, para que el panel se actualice igual.
+      - name: Generar panel web
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        run: python scripts/panel_mercados.py
+
+      - name: Archivar histórico en el repositorio
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        run: |
+          git config user.name "mercados-diarios[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add archivo/mercados scripts/constituyentes.json
+          if git diff --cached --quiet; then echo "Nada que archivar"; exit 0; fi
+          git commit -m "Mercados $(TZ=Europe/Madrid date +%d-%m-%Y)"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1
+
+      - uses: actions/configure-pages@v5
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+
+      - uses: actions/upload-pages-artifact@v3
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        with:
+          path: docs
+
+      - name: Publicar panel
+        id: publicar
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        uses: actions/deploy-pages@v4
+
+      - name: Avisar por email si algo ha fallado
+        if: failure() && steps.hora.outputs.seguir == 'si'
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_DESTINATARIO: ${{ secrets.EMAIL_DESTINATARIO }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          curl -s -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer $RESEND_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "{\"from\":\"Mercados Diarios <onboarding@resend.dev>\",\"to\":[\"$EMAIL_DESTINATARIO\"],\"subject\":\"Mercados diarios: fallo $(TZ=Europe/Madrid date +%d/%m/%Y)\",\"html\":\"<p>La actualización de hoy no se ha completado. Detalle: <a href='$RUN_URL'>$RUN_URL</a></p>\"}"

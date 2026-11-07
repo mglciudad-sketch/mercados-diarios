@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mercados Diarios</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --primary:#0F1F3D;--primary-medium:#2E4A7D;--primary-pale:#D6E0F0;--accent:#D4AF37;--accent-soft:#F8EFD4;
+  --surface:#FFFFFF;--muted:#6B6B6B;--surface-alt:#F2F2F2;--dark-muted:#A0A8B8;
+  --sans:'IBM Plex Sans',Arial,Helvetica,sans-serif;--mono:'IBM Plex Mono',Consolas,'Courier New',monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-alt);color:var(--primary);font-family:var(--sans);font-size:15px;line-height:1.45}
+header{position:sticky;top:0;z-index:10;background:var(--primary);color:#fff}
+.cab{max-width:1400px;margin:0 auto;padding:14px 16px 0}
+.etq{font-size:11px;letter-spacing:2px;font-weight:600;color:var(--accent)}
+h1{margin:2px 0 0;font-size:24px;font-weight:700}
+.sub{font-size:12px;color:var(--dark-muted);margin-top:2px}
+.chip{display:inline-block;margin-top:8px;font-size:12px;border:1px solid var(--primary-medium);padding:2px 8px;color:#fff}
+nav{display:flex;gap:4px;overflow-x:auto;margin-top:10px;scrollbar-width:none}
+nav button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;color:#fff;font:600 14px var(--sans);padding:9px 12px;cursor:pointer;opacity:.75}
+nav button[aria-selected=true]{border-bottom-color:var(--accent);color:var(--accent);opacity:1}
+main{max-width:1400px;margin:0 auto;padding:16px}
+section[hidden]{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--primary-pale);padding:14px 16px}
+.card h2,.panel h2{margin:0;font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--primary-medium)}
+.region{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.nombre{font-size:17px;font-weight:600}
+.fila{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.tag{font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap}
+.t-calma{background:var(--primary-pale);color:var(--primary)}
+.t-vigilancia{background:var(--accent-soft);color:var(--primary);border:1px solid var(--accent)}
+.t-alerta{background:var(--primary);color:#fff}
+.valor{font-family:var(--mono);font-size:26px;font-weight:600;margin-top:6px}
+.var{font-family:var(--mono);font-size:14px;font-weight:600}
+.mini{display:flex;gap:14px;margin-top:6px;font-size:12px;color:var(--muted)}
+.mini b{font-family:var(--mono);color:var(--primary);font-weight:500}
+.spark{width:100%;height:64px;margin-top:8px;display:block}
+.rango{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-family:var(--mono)}
+.expl{font-size:12px;color:var(--muted);margin-top:8px}
+.rank{margin-top:10px;font-size:13px;border-top:1px solid var(--surface-alt);padding-top:8px}
+.rank div{display:flex;justify-content:space-between;gap:6px}
+.rank .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank .p{font-family:var(--mono);white-space:nowrap}
+.rank .t{font-weight:600;font-size:12px;color:var(--primary-medium);margin-top:4px}
+.panel{background:var(--surface);border:1px solid var(--primary-pale);padding:16px;margin-bottom:14px}
+.dos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:14px}
+.gauge{position:relative;height:10px;margin:14px 0 4px;background:linear-gradient(90deg,var(--primary-medium),var(--primary-pale) 50%,var(--accent))}
+.gauge i{position:absolute;top:-5px;width:3px;height:20px;background:var(--primary)}
+.zonas{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.big{font-family:var(--mono);font-size:34px;font-weight:600}
+.lectura p{margin:6px 0;font-size:14px}
+.callout{background:var(--accent-soft);border-left:3px solid var(--accent);padding:9px 12px;font-size:14px;margin-top:10px}
+.advert{background:var(--primary-pale);border-left:3px solid var(--primary);padding:9px 12px;font-size:13px;margin-top:10px}
+.tabla{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{background:var(--primary);color:#fff;font-weight:600;text-align:left;padding:7px 10px;white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid var(--surface-alt);white-space:nowrap}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+tbody tr:nth-child(even){background:#FAFAFA}
+td.pos{background:#E8EEF8}
+td.neg{background:var(--surface-alt);color:var(--primary)}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.ctrl input{font:15px var(--sans);padding:6px 8px;border:1px solid var(--primary-medium);color:var(--primary)}
+.btn{font:600 13px var(--sans);padding:7px 12px;border:1px solid var(--primary);background:#fff;color:var(--primary);cursor:pointer}
+.btn[aria-pressed=true]{background:var(--primary);color:#fff}
+.lienzo{position:relative;height:340px}
+.nota{font-size:12px;color:var(--muted);margin-top:8px}
+.banda{background:var(--primary);color:#fff;font-style:italic;padding:9px 12px;font-size:13px;margin-top:6px}
+footer{max-width:1400px;margin:0 auto;padding:0 16px 24px;font-size:11px;color:var(--muted)}
+footer .pie{border-top:1px solid var(--primary);margin-top:10px;padding-top:8px}
+@media (max-width:720px){.dos{grid-template-columns:1fr}.lienzo{height:260px}h1{font-size:20px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="cab">
+    <div class="etq">PANEL DE MERCADOS</div>
+    <h1>Mercados Diarios</h1>
+    <div class="sub">IBEX 35 · Euro Stoxx 50 · S&amp;P 500 · Nasdaq 100 · MSCI World — se actualiza cada día laborable a las 8:00</div>
+    <span class="chip" id="chipFecha"></span>
+    <nav role="tablist">
+      <button role="tab" data-tab="hoy" aria-selected="true">Hoy</button>
+      <button role="tab" data-tab="dia" aria-selected="false">Cierre por día</button>
+      <button role="tab" data-tab="evol" aria-selected="false">Evolución</button>
+      <button role="tab" data-tab="anios" aria-selected="false">Por años</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="hoy">
+    <div class="dos">
+      <div class="panel">
+        <h2>Amplitud del mercado (0 a la baja · 100 al alza)</h2>
+        <div id="amplitud"></div>
+      </div>
+      <div class="panel lectura">
+        <h2 id="tituloLectura">Lectura de la sesión</h2>
+        <div id="lectura"></div>
+      </div>
+    </div>
+    <div class="grid" id="tarjetas"></div>
+  </section>
+
+  <section id="dia" hidden>
+    <div class="panel">
+      <h2>Cierre de cualquier día</h2>
+      <div class="ctrl" style="margin-top:12px">
+        <button class="btn" id="diaAnt" aria-label="Sesión anterior">◀</button>
+        <input type="date" id="fechaDia">
+        <button class="btn" id="diaSig" aria-label="Sesión siguiente">▶</button>
+        <button class="btn" id="diaHoy">Último cierre</button>
+      </div>
+      <div class="tabla"><table id="tablaDia"></table></div>
+      <div id="rankDia"></div>
+    </div>
+  </section>
+
+  <section id="evol" hidden>
+    <div class="panel">
+      <h2>Evolución comparada (base 100 al inicio del periodo)</h2>
+      <div class="ctrl" style="margin-top:12px" id="periodos"></div>
+      <div class="lienzo"><canvas id="graficoEvol"></canvas></div>
+    </div>
+    <div class="panel">
+      <h2>Rentabilidad por plazo</h2>
+      <div class="tabla" style="margin-top:10px"><table id="tablaPlazos"></table></div>
+      <div class="nota">Variación del precio del índice entre el cierre de hace 1, 3, 6 o 12 meses y el último cierre. No incluye dividendos.</div>
+    </div>
+  </section>
+
+  <section id="anios" hidden>
+    <div class="panel">
+      <h2>Rentabilidad por año (últimos 10 años)</h2>
+      <div class="tabla" style="margin-top:10px"><table id="tablaAnios"></table></div>
+      <div class="nota" id="notaAnios"></div>
+    </div>
+    <div class="panel">
+      <h2>Comparativa anual</h2>
+      <div class="lienzo"><canvas id="graficoAnios"></canvas></div>
+    </div>
+  </section>
+
+  <div class="banda" id="aviso"></div>
+</main>
+<footer>
+  Fuentes: <a href="https://finance.yahoo.com">Yahoo Finance</a> (cierres de índices y valores) · <a href="https://api.nasdaq.com/api/quote/list-type/nasdaq100">API de Nasdaq</a> · Wikipedia (composición de los índices).
+  Las cifras se calculan con los cierres oficiales; si un dato falta, se indica en lugar de estimarlo. <span id="generado"></span>
+  <div class="pie">Elaborado por Miguel Ciudad</div>
+</footer>
+
+<script id="datos" type="application/json">__DATOS__</script>
+<script>
+const D = JSON.parse(document.getElementById('datos').textContent);
+const IDX = D.indices;
+const S = D.series;
+const COLORES = {ibex:'#D4AF37', sx5e:'#2E4A7D', spx:'#0F1F3D', ndx:'#8FA3C7', msci:'#6B6B6B'};
+const DIAS = ['dom','lun','mar','mié','jue','vie','sáb'];
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function num(x, dec = 2) {
+  const [e, d] = Math.abs(x).toFixed(dec).split('.');
+  return (x < 0 ? '-' : '') + e.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (dec ? ',' + d : '');
+}
+const pct = (x, dec = 2) => (x > 0 ? '+' : '') + num(x, dec) + '%';
+const flecha = x => x > 0 ? '▲' : (x < 0 ? '▼' : '=');
+const fecha = iso => { const d = new Date(iso + 'T12:00:00'); return `${DIAS[d.getDay()]} ${iso.slice(8,10)}/${iso.slice(5,7)}/${iso.slice(0,4)}`; };
+function restar(iso, meses = 0, dias = 0) {
+  const d = new Date(iso + 'T12:00:00');
+  d.setMonth(d.getMonth() - meses); d.setDate(d.getDate() - dias);
+  return d.toISOString().slice(0, 10);
+}
+function posHasta(clave, iso) {
+  const a = S[clave].d; let lo = 0, hi = a.length - 1, r = -1;
+  while (lo <= hi) { const m = (lo + hi) >> 1; if (a[m] <= iso) { r = m; lo = m + 1; } else hi = m - 1; }
+  return r;
+}
+function rentab(clave, desdeIso, hastaPos) {
+  const s = S[clave], h = hastaPos ?? s.v.length - 1, p = posHasta(clave, desdeIso);
+  return p < 0 ? null : (s.v[h] / s.v[p] - 1) * 100;
+}
+const ultimo = clave => S[clave].d[S[clave].d.length - 1];
+const fechaRef = IDX.map(i => ultimo(i.clave)).sort().reverse()[0];
+
+function registroCon(clave, iso) {
+  const claves = Object.keys(D.historico).sort().reverse();
+  for (const k of claves) { const r = D.historico[k][clave]; if (r && r.fecha_cierre === iso) return r; }
+  return null;
+}
+const primerHistorico = Object.values(D.historico).flatMap(r => Object.values(r))
+  .filter(x => x.suben && x.suben.length && x.fecha_cierre).map(x => x.fecha_cierre).sort()[0];
+
+function estado(dd) {
+  if (dd > -2) return ['En máximos', 'calma'];
+  if (dd > -5) return ['Cerca de máximos', 'calma'];
+  if (dd > -10) return ['Vigilancia', 'vigilancia'];
+  if (dd > -20) return ['Corrección', 'alerta'];
+  return ['Mercado bajista', 'alerta'];
+}
+
+function sparkline(clave) {
+  const s = S[clave], fin = s.v.length - 1, ini = Math.max(0, posHasta(clave, restar(s.d[fin], 6)));
+  const v = s.v.slice(ini, fin + 1);
+  const p52 = Math.max(0, posHasta(clave, restar(s.d[fin], 12)));
+  const umbral = Math.max(...s.v.slice(p52, fin + 1)) * 0.9;
+  let mn = Math.min(...v, umbral), mx = Math.max(...v);
+  const W = 300, H = 64, y = x => H - 4 - (x - mn) / (mx - mn || 1) * (H - 8);
+  const pts = v.map((x, i) => `${(i / (v.length - 1) * W).toFixed(1)},${y(x).toFixed(1)}`).join(' ');
+  return {svg: `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Evolución de 6 meses">
+    <line x1="0" x2="${W}" y1="${y(umbral)}" y2="${y(umbral)}" stroke="#D4AF37" stroke-dasharray="4 3" stroke-width="1"/>
+    <polyline points="${pts}" fill="none" stroke="#0F1F3D" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>`,
+    desde: s.d[ini], mn: Math.min(...v), mx: Math.max(...v)};
+}
+
+function listaRank(r) {
+  if (!r || !r.suben || !r.suben.length) return '';
+  const f = (t, l) => `<div class="t">${t}</div>` + l.map(([n, p]) =>
+    `<div><span class="n">${esc(n)}</span><span class="p">${flecha(p)} ${pct(p)}</span></div>`).join('');
+  return `<div class="rank">${f('▲ Más suben', r.suben)}${f('▼ Más bajan', r.bajan)}</div>`;
+}
+
+function pintarHoy() {
+  $('chipFecha').textContent = 'Último cierre: ' + fecha(fechaRef);
+  let html = '', suben = 0, total = 0, frases = '';
+  for (const i of IDX) {
+    const s = S[i.clave], n = s.v.length - 1, d = s.d[n];
+    const vDia = (s.v[n] / s.v[n - 1] - 1) * 100;
+    const p52 = Math.max(0, posHasta(i.clave, restar(d, 12)));
+    const max52 = Math.max(...s.v.slice(p52, n + 1)), dd = (s.v[n] / max52 - 1) * 100;
+    const [txt, cls] = estado(dd);
+    const sp = sparkline(i.clave);
+    const r = registroCon(i.clave, d);
+    if (r && r.valores) { suben += r.al_alza; total += r.valores; }
+    if (r && r.frase) frases += `<p><b>${esc(i.nombre)}.</b> ${esc(r.frase)}</p>`;
+    const anio = rentab(i.clave, `${Number(d.slice(0, 4)) - 1}-12-31`);
+    html += `<article class="card">
+      <div class="fila"><div><div class="region">${esc(i.region)}</div><div class="nombre">${esc(i.nombre)}</div></div>
+        <span class="tag t-${cls}" title="${num(dd, 1)}% frente al máximo de 52 semanas">${txt}</span></div>
+      <div class="valor">${num(s.v[n])}</div>
+      <div class="var">${flecha(vDia)} ${pct(vDia)} <span style="font-weight:400;color:var(--muted);font-family:var(--sans);font-size:12px">· cierre del ${fecha(d)}</span></div>
+      <div class="mini"><span>Semana <b>${pct(rentab(i.clave, restar(d, 0, 7)), 1)}</b></span>
+        <span>Mes <b>${pct(rentab(i.clave, restar(d, 1)), 1)}</b></span>
+        <span>Año <b>${pct(anio, 1)}</b></span></div>
+      ${sp.svg}
+      <div class="rango"><span>${fecha(sp.desde).slice(4)}</span><span>mín ${num(sp.mn, 0)} · máx ${num(sp.mx, 0)}</span></div>
+      <div class="expl">${esc(i.desc)} A ${num(-dd, 1)}% de su máximo de 52 semanas; la línea dorada marca un 10% por debajo de ese máximo, donde se habla de corrección.</div>
+      ${listaRank(r)}
+      ${r && r.avisos && r.avisos.length ? r.avisos.map(a => `<div class="advert">${esc(a)}</div>`).join('') : ''}
+    </article>`;
+  }
+  $('tarjetas').innerHTML = html;
+  if (total) {
+    const a = suben / total * 100;
+    const zona = a < 35 ? 'Mayoría de valores a la baja' : (a > 65 ? 'Mayoría de valores al alza' : 'Sesión mixta');
+    $('amplitud').innerHTML = `<div class="big">${num(a, 0)} <span style="font-size:15px;font-family:var(--sans)">${zona}</span></div>
+      <div class="gauge"><i style="left:calc(${a}% - 1px)"></i></div>
+      <div class="zonas"><span>A la baja</span><span>Mixta</span><span>Al alza</span></div>
+      <div class="nota">${suben} de ${total} valores del IBEX 35, Euro Stoxx 50, S&amp;P 500 y Nasdaq 100 cerraron al alza (una empresa en dos índices cuenta dos veces). Mide si la subida o bajada es general o de unos pocos valores.</div>`;
+  } else {
+    $('amplitud').innerHTML = '<div class="advert">No hay datos de amplitud para esta sesión.</div>';
+  }
+  $('tituloLectura').textContent = 'Lectura de la sesión del ' + fecha(fechaRef);
+  $('lectura').innerHTML = frases || '<div class="advert">El reporte de esta sesión no está en el histórico.</div>';
+}
+
+function pintarDia(iso) {
+  $('fechaDia').value = iso;
+  let filas = '', ranks = '', avisoSesion = false;
+  for (const i of IDX) {
+    const p = posHasta(i.clave, iso), s = S[i.clave];
+    if (p < 1) { filas += `<tr><td>${esc(i.nombre)}</td><td class="num" colspan="2">sin datos</td><td></td></tr>`; continue; }
+    const v = (s.v[p] / s.v[p - 1] - 1) * 100, otro = s.d[p] !== iso;
+    avisoSesion ||= otro;
+    filas += `<tr><td>${esc(i.nombre)}</td><td class="num">${num(s.v[p])}</td>
+      <td class="num ${v >= 0 ? 'pos' : 'neg'}">${flecha(v)} ${pct(v)}</td>
+      <td style="color:var(--muted);font-size:13px">${otro ? 'último cierre: ' + fecha(s.d[p]) : fecha(s.d[p])}</td></tr>`;
+    const r = registroCon(i.clave, s.d[p]);
+    if (r && r.suben && r.suben.length) ranks += `<div class="card" style="margin-top:12px"><div class="nombre">${esc(i.nombre)}</div>${listaRank(r)}</div>`;
+  }
+  $('tablaDia').innerHTML = `<thead><tr><th>Índice</th><th class="num">Cierre</th><th class="num">Var. día</th><th>Sesión</th></tr></thead><tbody>${filas}</tbody>`;
+  const nota = avisoSesion ? `<div class="advert">El ${fecha(iso)} no hubo sesión en alguna bolsa (fin de semana o festivo); se muestra su último cierre anterior.</div>` : '';
+  const notaRank = ranks ? `<div class="grid">${ranks}</div>` :
+    `<div class="nota">Los valores que más suben y más bajan se guardan cada día desde el ${primerHistorico ? fecha(primerHistorico) : 'inicio del sistema'}. Para fechas anteriores solo hay datos de los índices.</div>`;
+  $('rankDia').innerHTML = nota + notaRank;
+}
+
+function sesiones() {
+  const t = new Set(); IDX.forEach(i => S[i.clave].d.forEach(d => t.add(d)));
+  return [...t].sort();
+}
+
+let grafEvol, grafAnios;
+const PERIODOS = [['1 mes', 1], ['3 meses', 3], ['6 meses', 6], ['12 meses', 12]];
+
+function pintarEvol(meses) {
+  document.querySelectorAll('#periodos .btn').forEach(b => b.setAttribute('aria-pressed', b.dataset.m == meses));
+  const desde = restar(fechaRef, meses), fechas = sesiones().filter(d => d >= desde);
+  const ds = IDX.map(i => {
+    const base = S[i.clave].v[Math.max(0, posHasta(i.clave, desde))];
+    return {label: i.nombre, borderColor: COLORES[i.clave], backgroundColor: COLORES[i.clave], borderWidth: 2,
+      borderDash: i.clave === 'msci' ? [5, 4] : [], pointRadius: 0, tension: 0,
+      data: fechas.map(d => +(S[i.clave].v[posHasta(i.clave, d)] / base * 100).toFixed(2))};
+  });
+  if (grafEvol) grafEvol.destroy();
+  grafEvol = new Chart($('graficoEvol'), {type: 'line', data: {labels: fechas.map(d => d.slice(8, 10) + '/' + d.slice(5, 7) + (meses > 6 ? '/' + d.slice(2, 4) : '')), datasets: ds},
+    options: {maintainAspectRatio: false, interaction: {mode: 'index', intersect: false},
+      plugins: {legend: {position: 'bottom', labels: {font: {family: 'IBM Plex Sans'}, boxWidth: 14}},
+        tooltip: {callbacks: {label: c => `${c.dataset.label}: ${num(c.parsed.y)} (${pct(c.parsed.y - 100)})`}}},
+      scales: {x: {ticks: {maxTicksLimit: 8, font: {family: 'IBM Plex Mono', size: 11}}, grid: {display: false}},
+        y: {ticks: {font: {family: 'IBM Plex Mono', size: 11}, callback: v => num(v, 0)}, grid: {color: '#F2F2F2'}}}}});
+}
+
+function pintarPlazos() {
+  let h = '<thead><tr><th>Índice</th>' + PERIODOS.map(p => `<th class="num">${p[0]}</th>`).join('') + '</tr></thead><tbody>';
+  for (const i of IDX) {
+    h += `<tr><td>${esc(i.nombre)}</td>` + PERIODOS.map(([, m]) => {
+      const r = rentab(i.clave, restar(fechaRef, m));
+      return r === null ? '<td class="num">s/d</td>' : `<td class="num ${r >= 0 ? 'pos' : 'neg'}">${flecha(r)} ${pct(r)}</td>`;
+    }).join('') + '</tr>';
+  }
+  $('tablaPlazos').innerHTML = h + '</tbody>';
+}
+
+function pintarAnios() {
+  const actual = Number(fechaRef.slice(0, 4)), anios = [];
+  for (let y = actual; y >= actual - 10; y--) anios.push(y);
+  const res = {};
+  for (const i of IDX) {
+    res[i.clave] = {};
+    for (const y of anios) {
+      const fin = posHasta(i.clave, `${y}-12-31`), ini = posHasta(i.clave, `${y - 1}-12-31`);
+      res[i.clave][y] = ini < 0 || fin <= ini ? null : (S[i.clave].v[fin] / S[i.clave].v[ini] - 1) * 100;
+    }
+  }
+  const celda = r => r === null ? '<td class="num">s/d</td>' : `<td class="num ${r >= 0 ? 'pos' : 'neg'}">${flecha(r)} ${pct(r, 1)}</td>`;
+  let h = '<thead><tr><th>Año</th>' + IDX.map(i => `<th class="num">${esc(i.nombre)}</th>`).join('') + '</tr></thead><tbody>';
+  for (const y of anios) h += `<tr><td>${y}${y === actual ? ' *' : ''}</td>` + IDX.map(i => celda(res[i.clave][y])).join('') + '</tr>';
+  const completos = anios.filter(y => y < actual);
+  const media = c => { const v = completos.map(y => res[c][y]).filter(x => x !== null); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+  const acum = c => { const f = posHasta(c, `${actual - 1}-12-31`), i0 = posHasta(c, `${actual - 11}-12-31`);
+    return i0 < 0 ? null : (S[c].v[f] / S[c].v[i0] - 1) * 100; };
+  h += `<tr style="border-top:2px solid var(--primary)"><td><b>Media anual ${completos.at(-1)}–${completos[0]}</b></td>` + IDX.map(i => celda(media(i.clave))).join('') + '</tr>';
+  h += `<tr><td><b>Acumulado ${completos.at(-1)}–${completos[0]}</b></td>` + IDX.map(i => celda(acum(i.clave))).join('') + '</tr>';
+  $('tablaAnios').innerHTML = h + '</tbody>';
+  $('notaAnios').textContent = `* ${actual} en curso: del 31/12/${actual - 1} al ${fecha(fechaRef)}. Variación del precio del índice entre el último cierre de cada año y el del año anterior; no incluye dividendos. El MSCI World está en dólares.`;
+
+  const orden = [...anios].reverse();
+  if (grafAnios) grafAnios.destroy();
+  grafAnios = new Chart($('graficoAnios'), {type: 'bar',
+    data: {labels: orden.map(y => y === actual ? y + '*' : String(y)),
+      datasets: IDX.map(i => ({label: i.nombre, backgroundColor: COLORES[i.clave], data: orden.map(y => res[i.clave][y] === null ? null : +res[i.clave][y].toFixed(1))}))},
+    options: {maintainAspectRatio: false, plugins: {legend: {position: 'bottom', labels: {boxWidth: 14}},
+      tooltip: {callbacks: {label: c => `${c.dataset.label}: ${pct(c.parsed.y, 1)}`}}},
+      scales: {x: {grid: {display: false}}, y: {ticks: {callback: v => v + '%', font: {family: 'IBM Plex Mono', size: 11}}, grid: {color: '#F2F2F2'}}}}});
+}
+
+const pintado = {};
+function abrir(tab) {
+  document.querySelectorAll('nav button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === tab));
+  document.querySelectorAll('main section').forEach(s => s.hidden = s.id !== tab);
+  if (!pintado[tab]) {
+    pintado[tab] = true;
+    if (tab === 'dia') pintarDia(fechaRef);
+    if (tab === 'evol') { pintarEvol(3); pintarPlazos(); }
+    if (tab === 'anios') pintarAnios();
+  }
+  try { history.replaceState(null, '', '#' + tab); } catch (e) {}
+}
+
+document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => abrir(b.dataset.tab)));
+$('periodos').innerHTML = PERIODOS.map(([t, m]) => `<button class="btn" data-m="${m}">${t}</button>`).join('');
+$('periodos').addEventListener('click', e => { if (e.target.dataset.m) pintarEvol(Number(e.target.dataset.m)); });
+const todas = sesiones();
+$('fechaDia').min = todas[0]; $('fechaDia').max = fechaRef;
+$('fechaDia').addEventListener('change', e => { if (e.target.value) pintarDia(e.target.value); });
+const paso = d => {
+  const v = $('fechaDia').value, i = todas.findIndex(x => x >= v);
+  const base = i < 0 ? todas.length : i, exacta = todas[base] === v;
+  const j = d > 0 ? (exacta ? base + 1 : base) : base - 1;
+  pintarDia(todas[Math.min(Math.max(j, 0), todas.length - 1)]);
+};
+$('diaAnt').addEventListener('click', () => paso(-1));
+$('diaSig').addEventListener('click', () => paso(1));
+$('diaHoy').addEventListener('click', () => pintarDia(fechaRef));
+$('aviso').textContent = D.aviso;
+$('generado').textContent = 'Actualizado el ' + D.generado + '.';
+pintarHoy();
+const inicial = location.hash.slice(1);
+abrir(['hoy', 'dia', 'evol', 'anios'].includes(inicial) ? inicial : 'hoy');
+</script>
+</body>
+</html>
