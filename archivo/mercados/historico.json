@@ -161,5 +161,173 @@
    "valores": 50,
    "var_pct": -0.98
   }
+ },
+ "2026-11-09": {
+  "ibex": {
+   "al_alza": 33,
+   "avisos": [],
+   "bajan": [
+    [
+     "Repsol",
+     -1.81
+    ],
+    [
+     "Endesa",
+     0.0
+    ],
+    [
+     "Redeia Corporación",
+     0.06
+    ]
+   ],
+   "fecha_cierre": "2026-11-09",
+   "frase": "Jornada de fuertes subidas: 33 de 35 valores cerraron al alza y Solaria (+4,37%) fue el que más subió.",
+   "nivel": 19742.5,
+   "suben": [
+    [
+     "Solaria",
+     4.37
+    ],
+    [
+     "Indra",
+     4.16
+    ],
+    [
+     "ArcelorMittal",
+     3.91
+    ]
+   ],
+   "valores": 35,
+   "var_pct": 1.926
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-06",
+   "frase": "Sesión de ligeras caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4739.9,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.426
+  },
+  "ndx": {
+   "al_alza": 47,
+   "avisos": [
+    "Nasdaq 100: había un dato intradía de hoy; se ha descartado y se muestra el último cierre."
+   ],
+   "bajan": [
+    [
+     "Axon Enterprise",
+     -18.18
+    ],
+    [
+     "Microchip Technology",
+     -10.02
+    ],
+    [
+     "Dexcom",
+     -5.98
+    ]
+   ],
+   "fecha_cierre": "2026-11-06",
+   "frase": "Sesión positiva: 47 de 101 valores cerraron al alza y Rocket Lab Corporation (+15,39%) fue el que más subió.",
+   "nivel": 26989.99,
+   "suben": [
+    [
+     "Rocket Lab Corporation",
+     15.39
+    ],
+    [
+     "Airbnb",
+     11.67
+    ],
+    [
+     "Advanced Micro Devices",
+     11.04
+    ]
+   ],
+   "valores": 101,
+   "var_pct": 1.353
+  },
+  "spx": {
+   "al_alza": 184,
+   "avisos": [
+    "S&P 500: había un dato intradía de hoy; se ha descartado y se muestra el último cierre."
+   ],
+   "bajan": [
+    [
+     "Axon Enterprise",
+     -18.18
+    ],
+    [
+     "Microchip Technology",
+     -10.02
+    ],
+    [
+     "Charter Communications",
+     -6.19
+    ]
+   ],
+   "fecha_cierre": "2026-11-06",
+   "frase": "Sesión de ligeras subidas: 184 de 503 valores cerraron al alza y Coherent Corp. (+13,58%) fue el que más subió.",
+   "nivel": 7376.86,
+   "suben": [
+    [
+     "Coherent Corp.",
+     13.58
+    ],
+    [
+     "Airbnb",
+     11.67
+    ],
+    [
+     "Advanced Micro Devices",
+     11.04
+    ]
+   ],
+   "valores": 503,
+   "var_pct": 0.315
+  },
+  "sx5e": {
+   "al_alza": 35,
+   "avisos": [],
+   "bajan": [
+    [
+     "Adyen",
+     -2.27
+    ],
+    [
+     "EssilorLuxottica",
+     -1.65
+    ],
+    [
+     "Deutsche Börse",
+     -1.56
+    ]
+   ],
+   "fecha_cierre": "2026-11-09",
+   "frase": "Jornada de fuertes subidas: 35 de 50 valores cerraron al alza y UniCredit (+6,28%) fue el que más subió.",
+   "nivel": 6290.45,
+   "suben": [
+    [
+     "UniCredit",
+     6.28
+    ],
+    [
+     "Infineon Technologies",
+     6.27
+    ],
+    [
+     "Nokia",
+     5.3
+    ]
+   ],
+   "valores": 50,
+   "var_pct": 1.944
+  }
  }
 }
