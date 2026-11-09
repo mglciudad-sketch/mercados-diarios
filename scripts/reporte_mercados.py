@@ -382,9 +382,10 @@ def construir_bloques():
         if total and len(filas) < 0.9 * total:
             b["avisos"].append(f"{idx['nombre']}: ranking calculado con {len(filas)} de {total} valores "
                                "(faltan datos de algunos).")
-        orden = sorted(filas, key=lambda x: x[1], reverse=True)
-        b["suben"] = orden[:3]
-        b["bajan"] = sorted(filas, key=lambda x: x[1])[:3]
+        # Solo cuenta como "sube" o "baja" lo que realmente subió o bajó: un día casi todo al alza
+        # puede tener menos de 3 valores en negativo, y no se rellena con los "menos buenos".
+        b["suben"] = [f for f in sorted(filas, key=lambda x: x[1], reverse=True) if f[1] > 0][:3]
+        b["bajan"] = [f for f in sorted(filas, key=lambda x: x[1]) if f[1] < 0][:3]
         b["frase"] = frase_contexto(b.get("var"), filas)
         b["cobertura"] = (len(filas), total)
         b["al_alza"] = sum(1 for _, v in filas if v > 0)
@@ -399,9 +400,11 @@ def texto_reporte(hoy, bloques):
         lineas.append(b["nombre"].upper())
         if not b.get("error"):
             lineas.append(f"Cierre ({fecha_corta(b['fecha'])}): {num(b['nivel'])} puntos ({pct(b['var'])})")
-        if b["suben"]:
-            lineas.append("Más suben: " + " · ".join(f"{n} {pct(v)}" for n, v in b["suben"]))
-            lineas.append("Más bajan: " + " · ".join(f"{n} {pct(v)}" for n, v in b["bajan"]))
+        if b.get("cobertura"):
+            lineas.append("Más suben: " + (" · ".join(f"{n} {pct(v)}" for n, v in b["suben"])
+                                           or "ningún valor cerró al alza"))
+            lineas.append("Más bajan: " + (" · ".join(f"{n} {pct(v)}" for n, v in b["bajan"])
+                                           or "ningún valor cerró a la baja"))
         if b["frase"]:
             lineas.append(b["frase"])
         for a in b["avisos"]:
@@ -430,9 +433,12 @@ def html_reporte(hoy, bloques):
         + (f'{flecha(b["var"])} {pct(b["var"])}' if not b.get("error") else "s/d")
         + "</div></td>" for b in bloques)
 
-    def filas_tabla(titulo, filas):
+    def filas_tabla(titulo, filas, vacio):
         h = (f'<tr><td colspan="2" style="background:{C["primary"]};color:#FFFFFF;padding:6px 10px;'
              f'font-weight:600;font-size:13px;">{titulo}</td></tr>')
+        if not filas:
+            h += (f'<tr><td colspan="2" style="padding:6px 10px;color:{C["muted"]};font-size:13px;'
+                  f'font-style:italic;">{vacio}</td></tr>')
         for i, (n, v) in enumerate(filas):
             bg = C["alt"] if i % 2 else "#FFFFFF"
             h += (f'<tr style="background:{bg};"><td style="padding:6px 10px;color:{C["primary"]};'
@@ -451,10 +457,11 @@ def html_reporte(hoy, bloques):
                        f'<span style="font-family:{mono};font-weight:600;">{num(b["nivel"])}</span> puntos '
                        f'<span style="font-family:{mono};font-weight:600;white-space:nowrap;">'
                        f'{flecha(b["var"])} {pct(b["var"])}</span></div>')
-        if b["suben"]:
+        if b.get("cobertura"):
             cuerpo += (f'<table width="100%" cellpadding="0" cellspacing="0" style="margin-top:12px;'
                        f'border-collapse:collapse;border:1px solid {C["primary"]};">'
-                       + filas_tabla("▲ Más suben", b["suben"]) + filas_tabla("▼ Más bajan", b["bajan"])
+                       + filas_tabla("▲ Más suben", b["suben"], "Ningún valor cerró al alza.")
+                       + filas_tabla("▼ Más bajan", b["bajan"], "Ningún valor cerró a la baja.")
                        + "</table>")
         if b["frase"]:
             cuerpo += (f'<div style="margin-top:12px;background:{C["soft"]};border-left:3px solid {C["accent"]};'

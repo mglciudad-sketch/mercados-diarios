@@ -158,7 +158,18 @@ footer .pie{border-top:1px solid var(--primary);margin-top:10px;padding-top:8px}
 
 <script id="datos" type="application/json">__DATOS__</script>
 <script>
-const D = JSON.parse(document.getElementById('datos').textContent);
+const BRUTO = document.getElementById('datos').textContent.trim();
+if (BRUTO.startsWith('__')) {
+  document.querySelector('nav').style.display = 'none';
+  document.getElementById('chipFecha').style.display = 'none';
+  document.querySelector('main').innerHTML = `<div class="panel"><h2>Esto es la plantilla del panel, sin datos</h2>
+    <p>Este archivo es el molde: cada mañana GitHub lo rellena con los cierres del día y publica el resultado.
+    Abierto directamente no tiene datos, por eso no muestra nada.</p>
+    <p><b>El panel real está aquí:</b> <a href="https://mglciudad-sketch.github.io/mercados-diarios/">mglciudad-sketch.github.io/mercados-diarios</a></p>
+    <p class="nota">Para generarlo en el ordenador: <code>python scripts/panel_mercados.py</code> (crea <code>docs/index.html</code>).</p></div>`;
+  throw new Error('Plantilla sin datos: el panel real se genera con scripts/panel_mercados.py');
+}
+const D = JSON.parse(BRUTO);
 const IDX = D.indices;
 const S = D.series;
 const COLORES = {ibex:'#D4AF37', sx5e:'#2E4A7D', spx:'#0F1F3D', ndx:'#8FA3C7', msci:'#6B6B6B'};
@@ -196,7 +207,7 @@ function registroCon(clave, iso) {
   return null;
 }
 const primerHistorico = Object.values(D.historico).flatMap(r => Object.values(r))
-  .filter(x => x.suben && x.suben.length && x.fecha_cierre).map(x => x.fecha_cierre).sort()[0];
+  .filter(x => x.valores && x.fecha_cierre).map(x => x.fecha_cierre).sort()[0];
 
 function estado(dd) {
   if (dd > -2) return ['En máximos', 'calma'];
@@ -221,10 +232,11 @@ function sparkline(clave) {
 }
 
 function listaRank(r) {
-  if (!r || !r.suben || !r.suben.length) return '';
-  const f = (t, l) => `<div class="t">${t}</div>` + l.map(([n, p]) =>
-    `<div><span class="n">${esc(n)}</span><span class="p">${flecha(p)} ${pct(p)}</span></div>`).join('');
-  return `<div class="rank">${f('▲ Más suben', r.suben)}${f('▼ Más bajan', r.bajan)}</div>`;
+  if (!r || !r.valores) return '';
+  const f = (t, l, vacio) => `<div class="t">${t}</div>` + (l.length ? l.map(([n, p]) =>
+    `<div><span class="n">${esc(n)}</span><span class="p">${flecha(p)} ${pct(p)}</span></div>`).join('')
+    : `<div style="color:var(--muted);font-style:italic">${vacio}</div>`);
+  return `<div class="rank">${f('▲ Más suben', r.suben, 'Ningún valor cerró al alza.')}${f('▼ Más bajan', r.bajan, 'Ningún valor cerró a la baja.')}</div>`;
 }
 
 function pintarHoy() {
@@ -283,7 +295,7 @@ function pintarDia(iso) {
       <td class="num ${v >= 0 ? 'pos' : 'neg'}">${flecha(v)} ${pct(v)}</td>
       <td style="color:var(--muted);font-size:13px">${otro ? 'último cierre: ' + fecha(s.d[p]) : fecha(s.d[p])}</td></tr>`;
     const r = registroCon(i.clave, s.d[p]);
-    if (r && r.suben && r.suben.length) ranks += `<div class="card" style="margin-top:12px"><div class="nombre">${esc(i.nombre)}</div>${listaRank(r)}</div>`;
+    if (r && r.valores) ranks += `<div class="card" style="margin-top:12px"><div class="nombre">${esc(i.nombre)}</div>${listaRank(r)}</div>`;
   }
   $('tablaDia').innerHTML = `<thead><tr><th>Índice</th><th class="num">Cierre</th><th class="num">Var. día</th><th>Sesión</th></tr></thead><tbody>${filas}</tbody>`;
   const nota = avisoSesion ? `<div class="advert">El ${fecha(iso)} no hubo sesión en alguna bolsa (fin de semana o festivo); se muestra su último cierre anterior.</div>` : '';
