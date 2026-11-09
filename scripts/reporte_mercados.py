@@ -495,7 +495,7 @@ def html_reporte(hoy, bloques):
 <div style="margin-top:10px;font-size:11px;line-height:1.5;color:{C['muted']};">Fuentes: {fuentes}</div>
 </td></tr>
 <tr><td style="padding:16px 22px 20px 22px;border-top:0;">
-<div style="border-top:1px solid {C['primary']};padding-top:8px;font-size:11px;color:{C['muted']};">Elaborado por Miguel Ciudad · generado automáticamente cada día laborable a las 8:00</div>
+<div style="border-top:1px solid {C['primary']};padding-top:8px;font-size:11px;color:{C['muted']};">Elaborado por Miguel Ciudad · generado automáticamente cada día laborable a partir de las 7:00</div>
 </td></tr>
 </table></td></tr></table>
 </body></html>"""
@@ -545,6 +545,8 @@ def main():
     ap = argparse.ArgumentParser(description="Reporte diario de mercados")
     ap.add_argument("--sin-email", action="store_true", help="no enviar el email")
     ap.add_argument("--html", help="guardar también el HTML en esta ruta")
+    ap.add_argument("--exigir-completo", action="store_true",
+                    help="si falta algún dato, no enviar nada y salir con código 3 (se reintentará)")
     args = ap.parse_args()
 
     hoy = datetime.now(MADRID).date()
@@ -555,19 +557,25 @@ def main():
     palabras = len(texto.split("Fuentes:")[0].split())
     log(f"Reporte generado: {palabras} palabras (sin contar fuentes)")
 
-    CARPETA_ARCHIVO.mkdir(parents=True, exist_ok=True)
-    (CARPETA_ARCHIVO / f"{hoy:%Y-%m-%d}.md").write_text(texto + "\n", encoding="utf-8")
-    guardar_historico(hoy, bloques)
-    if args.html:
-        Path(args.html).write_text(cuerpo_html, encoding="utf-8")
-
     sys.stdout.reconfigure(encoding="utf-8")
     print(texto)
+
+    faltan = [a for b in bloques for a in b["avisos"] if a != NOTA_MSCI and "dato intradía" not in a]
+    if args.exigir_completo and faltan:
+        log("Datos incompletos; no se envía para reintentarlo más tarde: " + " | ".join(faltan))
+        sys.exit(3)
 
     if not args.sin_email and not os.environ.get("RESEND_API_KEY"):
         print("::warning::Falta el secreto RESEND_API_KEY: hoy no se envía el email", flush=True)
     elif not args.sin_email:
         enviar_email(f"Reporte diario de mercados — {hoy:%d/%m/%Y}", cuerpo_html, texto)
+
+    # Se archiva después del envío: que exista el reporte de hoy significa que el email ya salió.
+    CARPETA_ARCHIVO.mkdir(parents=True, exist_ok=True)
+    (CARPETA_ARCHIVO / f"{hoy:%Y-%m-%d}.md").write_text(texto + "\n", encoding="utf-8")
+    guardar_historico(hoy, bloques)
+    if args.html:
+        Path(args.html).write_text(cuerpo_html, encoding="utf-8")
 
     if all(b.get("error") for b in bloques):
         sys.exit("No se ha podido obtener ningún dato de mercado")

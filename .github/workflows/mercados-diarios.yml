@@ -2,10 +2,11 @@ name: Mercados diarios
 
 on:
   schedule:
-    # GitHub usa hora UTC: se programan las dos y el primer paso deja pasar
-    # solo la que corresponde a las 08:00 de Madrid (verano UTC+2 / invierno UTC+1).
-    - cron: '0 6 * * 1-5'
-    - cron: '0 7 * * 1-5'
+    # Hora UTC. Un intento cada media hora de 07:02 a 12:02 de Madrid en invierno (UTC+1);
+    # en verano (UTC+2) llega hasta las 13:02. Los intentos antes de las 07:00 de Madrid se descartan.
+    # Minutos 02 y 32 para evitar la congestión de GitHub a las horas en punto.
+    - cron: '2,32 5-10 * * 1-5'
+    - cron: '2 11 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -25,20 +26,24 @@ jobs:
       name: github-pages
       url: ${{ steps.publicar.outputs.page_url }}
     steps:
-      - name: Comprobar que son las 08:00 en Madrid
+      - uses: actions/checkout@v4
+
+      # Programado: solo desde las 07:00 de Madrid y si el reporte de hoy aún no se ha enviado.
+      # Antes de las 11:30 solo se envía con todos los datos completos; después, con lo que haya y avisos.
+      # Lanzado a mano: se envía siempre.
+      - name: Decidir si toca enviar
         id: hora
         run: |
-          SEGUIR=si
+          HOY=$(TZ=Europe/Madrid date +%F)
+          HM=$((10#$(TZ=Europe/Madrid date +%H%M)))
+          SEGUIR=si; EXIGIR=no; ULTIMO=si
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            OFFSET=$(TZ=Europe/Madrid date +%z)
-            if [ "$OFFSET" = "+0200" ] && [ "${{ github.event.schedule }}" != "0 6 * * 1-5" ]; then SEGUIR=no; fi
-            if [ "$OFFSET" = "+0100" ] && [ "${{ github.event.schedule }}" != "0 7 * * 1-5" ]; then SEGUIR=no; fi
+            if [ "$HM" -lt 700 ]; then SEGUIR=no; echo "Aún no son las 07:00 en Madrid"; fi
+            if [ -f "archivo/mercados/$HOY.md" ]; then SEGUIR=no; echo "El reporte de hoy ya se envió"; fi
+            if [ "$HM" -lt 1130 ]; then EXIGIR=si; ULTIMO=no; fi
           fi
-          echo "Madrid: $(TZ=Europe/Madrid date) -> seguir=$SEGUIR"
-          echo "seguir=$SEGUIR" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/checkout@v4
-        if: steps.hora.outputs.seguir == 'si'
+          echo "Madrid: $(TZ=Europe/Madrid date) -> seguir=$SEGUIR exigir_completo=$EXIGIR ultimo_intento=$ULTIMO"
+          { echo "seguir=$SEGUIR"; echo "exigir=$EXIGIR"; echo "ultimo=$ULTIMO"; } >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-python@v5
         if: steps.hora.outputs.seguir == 'si'
@@ -52,20 +57,34 @@ jobs:
         run: pip install -r scripts/requirements-mercados.txt
 
       - name: Reporte diario y email
+        id: reporte
         if: steps.hora.outputs.seguir == 'si'
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           EMAIL_DESTINATARIO: ${{ secrets.EMAIL_DESTINATARIO }}
           PANEL_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
-        run: python scripts/reporte_mercados.py
+        run: |
+          OPCION=""
+          if [ "${{ steps.hora.outputs.exigir }}" = "si" ]; then OPCION="--exigir-completo"; fi
+          set +e
+          python scripts/reporte_mercados.py $OPCION
+          RC=$?
+          set -e
+          if [ $RC -eq 3 ]; then
+            echo "listo=no" >> "$GITHUB_OUTPUT"
+            echo "::notice::Faltan datos; no se envía y se reintenta en el siguiente intento"
+            exit 0
+          fi
+          echo "listo=si" >> "$GITHUB_OUTPUT"
+          exit $RC
 
       # Los pasos siguientes se ejecutan aunque falle el email, para que el panel se actualice igual.
       - name: Generar panel web
-        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' && steps.reporte.outputs.listo != 'no' }}
         run: python scripts/panel_mercados.py
 
       - name: Archivar histórico en el repositorio
-        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' && steps.reporte.outputs.listo != 'no' }}
         run: |
           git config user.name "mercados-diarios[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -76,20 +95,22 @@ jobs:
           exit 1
 
       - uses: actions/configure-pages@v5
-        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' && steps.reporte.outputs.listo != 'no' }}
 
       - uses: actions/upload-pages-artifact@v3
-        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' && steps.reporte.outputs.listo != 'no' }}
         with:
           path: docs
 
       - name: Publicar panel
         id: publicar
-        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' }}
+        if: ${{ !cancelled() && steps.hora.outputs.seguir == 'si' && steps.reporte.outputs.listo != 'no' }}
         uses: actions/deploy-pages@v4
 
+      # Solo avisa en los últimos intentos (o al lanzarlo a mano), para no llenar el correo
+      # si los primeros fallan y un reintento posterior lo arregla.
       - name: Avisar por email si algo ha fallado
-        if: failure() && steps.hora.outputs.seguir == 'si'
+        if: failure() && steps.hora.outputs.seguir == 'si' && steps.hora.outputs.ultimo == 'si'
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           EMAIL_DESTINATARIO: ${{ secrets.EMAIL_DESTINATARIO }}

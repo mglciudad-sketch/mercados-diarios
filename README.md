@@ -9,7 +9,7 @@ Funciona solo, en la nube, sin tener el ordenador encendido.
 
 ## Qué hace
 
-Cada día laborable a las **08:00 (hora de Madrid)**, antes de que abra la bolsa europea:
+Cada día laborable a las **07:00 (hora de Madrid)**, antes de que abra la bolsa europea (con reintentos automáticos hasta las 12:00, ver más abajo):
 
 1. **Descarga los datos** del cierre del día anterior.
 2. **Calcula** para cada índice el nivel de cierre, la variación del día y los 3 valores que más suben y más bajan.
@@ -21,7 +21,7 @@ Si algo falla, llega un email de aviso con el enlace al error.
 
 ```mermaid
 flowchart LR
-    A[FUENTES<br>Yahoo Finance · API de Nasdaq · Wikipedia] --> B[TAREA PROGRAMADA<br>GitHub Actions<br>L-V 08:00 Madrid]
+    A[FUENTES<br>Yahoo Finance · API de Nasdaq · Wikipedia] --> B[TAREA PROGRAMADA<br>GitHub Actions<br>L-V 07:00 Madrid<br>reintentos hasta 12:00]
     B --> C[BASE DE DATOS<br>archivo/mercados/historico.json]
     C --> D[PANEL + EMAIL<br>GitHub Pages · Resend<br>aviso en el móvil]
 ```
@@ -38,6 +38,7 @@ Está inspirado en el "Barómetro de Mercado" del Máster de IA aplicada (track 
 | **Cierre, no dato intradía** | Si una fuente trae un dato de la sesión de hoy (mercado aún abierto), se descarta y se usa el último cierre, con aviso. |
 | **Fuentes de respaldo** | Si la API de Nasdaq falla o trae otra fecha, el Nasdaq 100 se calcula con Yahoo. Si Wikipedia falla, se usa la última composición guardada. Si Yahoo deja un valor vacío, se reintenta uno a uno. |
 | **Verificación** | La API de Nasdaq solo se usa si su fecha coincide con la del cierre del índice. |
+| **Reintentos sin duplicados** | Si a las 07:00 falta algún dato o GitHub se retrasa, se reintenta cada media hora hasta las 12:00. Solo se envía **un** email al día: el primer intento que funciona; los siguientes ven que el reporte de hoy ya existe y no hacen nada. |
 
 ---
 
@@ -82,7 +83,7 @@ https://github.com/mglciudad-sketch/mercados-diarios/actions
 | Quiero… | Cómo |
 |---|---|
 | **Ver si hoy ha funcionado** | En Actions, la ejecución del día aparece con ✅ (bien) o ❌ (falló). El pie del panel también dice "Actualizado el …". |
-| **Lanzarlo ahora a mano** | Actions → **Mercados diarios** (izquierda) → **Run workflow** → botón verde **Run workflow**. Tarda 1-2 minutos y envía el email. |
+| **Lanzarlo ahora a mano** | Actions → **Mercados diarios** (izquierda) → **Run workflow** → botón verde **Run workflow**. Tarda 1-2 minutos y envía el email **siempre**, aunque ya se hubiera enviado hoy. |
 | **Pausarlo** (vacaciones) | Actions → **Mercados diarios** → **⋯** (arriba a la derecha) → **Disable workflow**. Para reactivarlo: **Enable workflow**. |
 | **Cambiar hora, índices o formato** | Pedírselo a Claude Code indicando este repositorio. |
 
@@ -92,13 +93,25 @@ Ya **no aparece** en "Tareas programadas" de Claude: no lo ejecuta Claude, lo ej
 
 ## Si no llega el email
 
-1. Mira en **Actions** si la ejecución del día salió ✅ o ❌.
-   - ❌ → abre la ejecución para ver el error. Normalmente es una fuente caída: se puede relanzar a mano.
-   - ✅ → el email salió. Pasa al punto 2.
-2. En Gmail busca `from:onboarding@resend.dev` en **Todos**, **Spam**, **Notificaciones** y **Papelera**.
-3. Si el problema es de **Resend** (por ejemplo, una clave caducada), crea una clave nueva en https://resend.com → **API Keys** y sustitúyela en **Settings → Secrets and variables → Actions → `RESEND_API_KEY`**.
+1. Antes de las 12:00 puede que aún esté reintentando: espera al siguiente intento (cada media hora).
+2. Mira en **Actions** las ejecuciones de hoy.
+   - Alguna larga (1-2 minutos) con ✅ → el email salió. Pasa al punto 3.
+   - ❌ en las de las 11:30 o 12:00 → abre la ejecución para ver el error (normalmente, una fuente caída) y relánzala a mano.
+   - No hay ejecuciones de hoy → GitHub tiene una incidencia; míralo en https://www.githubstatus.com y lánzalo a mano.
+3. En Gmail busca `from:onboarding@resend.dev` en **Todos**, **Spam**, **Notificaciones** y **Papelera**.
+4. Si el problema es de **Resend** (por ejemplo, una clave caducada), crea una clave nueva en https://resend.com → **API Keys** y sustitúyela en **Settings → Secrets and variables → Actions → `RESEND_API_KEY`**.
 
-Notas sobre la hora: GitHub a veces arranca las tareas programadas con 5-20 minutos de retraso. El cambio de horario de verano a invierno se ajusta solo.
+### Cómo funcionan el horario y los reintentos
+
+| Hora (Madrid) | Qué hace cada intento |
+|---|---|
+| 07:00 – 11:00 | Si el reporte de hoy ya se envió, no hace nada. Si no, lo genera y **solo lo envía si están todos los datos**; si falta alguno, espera al siguiente intento (media hora después). |
+| 11:30 y 12:00 | Últimos intentos: si aún no se ha enviado, lo envía **con lo que haya** y avisos de lo que falte. Si fallan, llega el email de aviso de fallo. |
+
+- En Actions verás muchas ejecuciones cada mañana; casi todas duran unos segundos porque solo comprueban que el reporte ya salió. Es normal.
+- En invierno los intentos van de 07:00 a 12:00; en verano GitHub no cambia de hora y llegan hasta las 13:00 (los de más no hacen nada si ya se envió).
+- GitHub puede arrancar las tareas con retraso, sobre todo si tiene incidencias ([estado de GitHub](https://www.githubstatus.com)). El 09/11/2026 una avería de GitHub Actions retrasó la ejecución de la mañana casi 10 horas; los reintentos existen para eso.
+- Desde las 09:00 la bolsa europea está abierta: si el reporte sale a esa hora, IBEX y Euro Stoxx muestran el cierre del día anterior con un aviso de que se ha descartado el dato de la sesión en curso.
 
 ---
 
