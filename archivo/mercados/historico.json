@@ -324,35 +324,41 @@
  },
  "2026-11-10": {
   "ibex": {
-   "al_alza": 33,
-   "avisos": [
-    "IBEX 35: había un dato intradía de hoy; se ha descartado y se muestra el último cierre."
-   ],
+   "al_alza": 25,
+   "avisos": [],
    "bajan": [
     [
-     "Repsol",
-     -1.81
-    ]
-   ],
-   "fecha_cierre": "2026-11-09",
-   "frase": "Jornada de fuertes subidas: 33 de 35 valores cerraron al alza y Solaria (+4,37%) fue el que más subió.",
-   "nivel": 19742.5,
-   "suben": [
-    [
-     "Solaria",
-     4.37
+     "Acciona",
+     -2.43
     ],
     [
-     "Indra",
-     4.16
+     "Solaria",
+     -2.4
+    ],
+    [
+     "Repsol",
+     -2.15
+    ]
+   ],
+   "fecha_cierre": "2026-11-10",
+   "frase": "Sesión positiva: 25 de 35 valores cerraron al alza y CaixaBank (+3,92%) fue el que más subió.",
+   "nivel": 20005.1,
+   "suben": [
+    [
+     "CaixaBank",
+     3.92
+    ],
+    [
+     "Acerinox",
+     3.2
     ],
     [
      "ArcelorMittal",
-     3.91
+     2.89
     ]
    ],
    "valores": 35,
-   "var_pct": 1.926
+   "var_pct": 1.33
   },
   "msci": {
    "al_alza": null,
@@ -369,37 +375,39 @@
    "var_pct": 2.247
   },
   "ndx": {
-   "al_alza": 37,
-   "avisos": [],
+   "al_alza": 86,
+   "avisos": [
+    "Nasdaq 100: había un dato intradía de hoy; se ha descartado y se muestra el último cierre."
+   ],
    "bajan": [
     [
-     "Rocket Lab Corporation",
-     -7.85
+     "Nvidia",
+     -4.27
     ],
     [
-     "Lumentum",
-     -3.21
+     "Thomson Reuters Corporation",
+     -3.79
     ],
     [
-     "Marvell Technology",
-     -2.83
+     "Take-Two Interactive",
+     -3.48
     ]
    ],
    "fecha_cierre": "2026-11-09",
-   "frase": "Jornada de fuertes subidas: 37 de 101 valores cerraron al alza y Take-Two Interactive (+4,53%) fue el que más subió.",
+   "frase": "Jornada de fuertes subidas: 86 de 101 valores cerraron al alza y Monolithic Power Systems (+16,60%) fue el que más subió.",
    "nivel": 27907.63,
    "suben": [
     [
-     "Take-Two Interactive",
-     4.53
+     "Monolithic Power Systems",
+     16.6
     ],
     [
-     "Mondelez International",
-     1.97
+     "Astera Labs, Inc.",
+     13.72
     ],
     [
-     "Amgen",
-     1.46
+     "Advanced Micro Devices",
+     13.26
     ]
    ],
    "valores": 101,
@@ -407,7 +415,9 @@
   },
   "spx": {
    "al_alza": 423,
-   "avisos": [],
+   "avisos": [
+    "S&P 500: había un dato intradía de hoy; se ha descartado y se muestra el último cierre."
+   ],
    "bajan": [
     [
      "First Solar",
@@ -443,43 +453,41 @@
    "var_pct": 2.346
   },
   "sx5e": {
-   "al_alza": 35,
-   "avisos": [
-    "Euro Stoxx 50: había un dato intradía de hoy; se ha descartado y se muestra el último cierre."
-   ],
+   "al_alza": 37,
+   "avisos": [],
    "bajan": [
     [
-     "Adyen",
-     -2.27
+     "Siemens Energy",
+     -4.0
     ],
     [
      "EssilorLuxottica",
-     -1.65
+     -1.31
     ],
     [
-     "Deutsche Börse",
-     -1.56
+     "Eni",
+     -1.16
     ]
    ],
-   "fecha_cierre": "2026-11-09",
-   "frase": "Jornada de fuertes subidas: 35 de 50 valores cerraron al alza y UniCredit (+6,28%) fue el que más subió.",
-   "nivel": 6290.45,
+   "fecha_cierre": "2026-11-10",
+   "frase": "Sesión positiva: 37 de 50 valores cerraron al alza y Ahold Delhaize (+2,98%) fue el que más subió.",
+   "nivel": 6342.05,
    "suben": [
     [
+     "Ahold Delhaize",
+     2.98
+    ],
+    [
      "UniCredit",
-     6.28
+     2.62
     ],
     [
-     "Infineon Technologies",
-     6.27
-    ],
-    [
-     "Nokia",
-     5.3
+     "Safran",
+     2.58
     ]
    ],
    "valores": 50,
-   "var_pct": 1.944
+   "var_pct": 0.82
   }
  }
 }
