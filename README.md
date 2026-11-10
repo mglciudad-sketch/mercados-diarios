@@ -9,7 +9,7 @@ Funciona solo, en la nube, sin tener el ordenador encendido.
 
 ## Qué hace
 
-Cada día laborable a las **07:00 (hora de Madrid)**, antes de que abra la bolsa europea (con reintentos automáticos hasta las 12:00, ver más abajo):
+De lunes a sábado a las **07:00 (hora de Madrid)**, antes de que abra la bolsa europea (con reintentos automáticos hasta las 12:00, ver más abajo):
 
 1. **Descarga los datos** del cierre del día anterior.
 2. **Calcula** para cada índice el nivel de cierre, la variación del día y los 3 valores que más suben y más bajan.

@@ -5,8 +5,8 @@ on:
     # Hora UTC. Un intento cada media hora de 07:02 a 12:02 de Madrid en invierno (UTC+1);
     # en verano (UTC+2) llega hasta las 13:02. Los intentos antes de las 07:00 de Madrid se descartan.
     # Minutos 02 y 32 para evitar la congestión de GitHub a las horas en punto.
-    - cron: '2,32 5-10 * * 1-5'
-    - cron: '2 11 * * 1-5'
+    - cron: '2,32 5-10 * * 1-6'
+    - cron: '2 11 * * 1-6'
   workflow_dispatch:
 
 permissions:

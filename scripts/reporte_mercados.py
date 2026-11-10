@@ -502,7 +502,7 @@ def html_reporte(hoy, bloques):
 <div style="margin-top:10px;font-size:11px;line-height:1.5;color:{C['muted']};">Fuentes: {fuentes}</div>
 </td></tr>
 <tr><td style="padding:16px 22px 20px 22px;border-top:0;">
-<div style="border-top:1px solid {C['primary']};padding-top:8px;font-size:11px;color:{C['muted']};">Elaborado por Miguel Ciudad · generado automáticamente cada día laborable a partir de las 7:00</div>
+<div style="border-top:1px solid {C['primary']};padding-top:8px;font-size:11px;color:{C['muted']};">Elaborado por Miguel Ciudad · generado automáticamente de lunes a sábado a partir de las 7:00</div>
 </td></tr>
 </table></td></tr></table>
 </body></html>"""
