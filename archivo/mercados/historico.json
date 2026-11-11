@@ -489,5 +489,121 @@
    "valores": 50,
    "var_pct": 0.82
   }
+ },
+ "2026-11-11": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-10",
+   "frase": null,
+   "nivel": 19936.4,
+   "suben": [],
+   "valores": null,
+   "var_pct": 0.982
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-10",
+   "frase": "Sesión de ligeras caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4836.0,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.215
+  },
+  "ndx": {
+   "al_alza": 36,
+   "avisos": [],
+   "bajan": [
+    [
+     "Moderna",
+     -6.75
+    ],
+    [
+     "Nvidia",
+     -5.53
+    ],
+    [
+     "Nebius Group N.V.",
+     -5.27
+    ]
+   ],
+   "fecha_cierre": "2026-11-10",
+   "frase": "Sesión negativa: 36 de 101 valores cerraron al alza y Moderna (-6,75%) fue el más castigado.",
+   "nivel": 27740.79,
+   "suben": [
+    [
+     "Take-Two Interactive",
+     8.31
+    ],
+    [
+     "Rocket Lab Corporation",
+     6.54
+    ],
+    [
+     "Broadcom",
+     3.91
+    ]
+   ],
+   "valores": 101,
+   "var_pct": -0.598
+  },
+  "spx": {
+   "al_alza": 247,
+   "avisos": [],
+   "bajan": [
+    [
+     "Skydance",
+     -7.59
+    ],
+    [
+     "Moderna",
+     -6.75
+    ],
+    [
+     "First Solar",
+     -5.55
+    ]
+   ],
+   "fecha_cierre": "2026-11-10",
+   "frase": "Sesión de ligeras caídas: 247 de 503 valores cerraron al alza y Skydance (-7,59%) fue el más castigado.",
+   "nivel": 7520.93,
+   "suben": [
+    [
+     "Charter Communications",
+     10.61
+    ],
+    [
+     "Take-Two Interactive",
+     8.31
+    ],
+    [
+     "CVS Health",
+     4.41
+    ]
+   ],
+   "valores": 503,
+   "var_pct": -0.384
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-10",
+   "frase": null,
+   "nivel": 6327.87,
+   "suben": [],
+   "valores": null,
+   "var_pct": 0.595
+  }
  }
 }
