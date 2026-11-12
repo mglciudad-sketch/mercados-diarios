@@ -605,5 +605,120 @@
    "valores": null,
    "var_pct": 0.595
   }
+ },
+ "2026-11-12": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-11",
+   "frase": null,
+   "nivel": 20027.9,
+   "suben": [],
+   "valores": null,
+   "var_pct": 0.459
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-11",
+   "frase": "Sesión positiva para la bolsa mundial en su conjunto.",
+   "nivel": 4886.1,
+   "suben": [],
+   "valores": null,
+   "var_pct": 1.036
+  },
+  "ndx": {
+   "al_alza": 84,
+   "avisos": [],
+   "bajan": [
+    [
+     "Airbnb",
+     -3.09
+    ],
+    [
+     "Space Exploration Technologies Corp.",
+     -2.33
+    ],
+    [
+     "Microsoft",
+     -2.26
+    ]
+   ],
+   "fecha_cierre": "2026-11-11",
+   "frase": "Jornada de fuertes subidas: 84 de 101 valores cerraron al alza y CoreWeave, Inc. (+24,71%) fue el que más subió.",
+   "nivel": 28374.25,
+   "suben": [
+    [
+     "CoreWeave, Inc.",
+     24.71
+    ],
+    [
+     "Nebius Group N.V.",
+     15.44
+    ],
+    [
+     "Sandisk",
+     13.69
+    ]
+   ],
+   "valores": 101,
+   "var_pct": 2.284
+  },
+  "spx": {
+   "al_alza": 332,
+   "avisos": [],
+   "bajan": [
+    [
+     "Airbnb",
+     -3.09
+    ],
+    [
+     "Lululemon Athletica",
+     -2.65
+    ],
+    [
+     "McDonald's",
+     -2.61
+    ]
+   ],
+   "fecha_cierre": "2026-11-11",
+   "frase": "Sesión positiva: 332 de 503 valores cerraron al alza y Sandisk (+13,69%) fue el que más subió.",
+   "nivel": 7619.38,
+   "suben": [
+    [
+     "Sandisk",
+     13.69
+    ],
+    [
+     "Bloom Energy",
+     12.97
+    ],
+    [
+     "Micron Technology",
+     11.89
+    ]
+   ],
+   "valores": 503,
+   "var_pct": 1.309
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-11",
+   "frase": null,
+   "nivel": 6393.39,
+   "suben": [],
+   "valores": null,
+   "var_pct": 1.035
+  }
  }
 }
