@@ -720,5 +720,121 @@
    "valores": null,
    "var_pct": 1.035
   }
+ },
+ "2026-11-13": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-12",
+   "frase": null,
+   "nivel": 19965.5,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.312
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-12",
+   "frase": "Sesión de ligeras caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4870.4,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.321
+  },
+  "ndx": {
+   "al_alza": 35,
+   "avisos": [],
+   "bajan": [
+    [
+     "Nebius Group N.V.",
+     -16.84
+    ],
+    [
+     "Keurig Dr Pepper",
+     -7.4
+    ],
+    [
+     "Moderna",
+     -6.97
+    ]
+   ],
+   "fecha_cierre": "2026-11-12",
+   "frase": "Sesión de ligeras caídas: 35 de 101 valores cerraron al alza y Nebius Group N.V. (-16,84%) fue el más castigado.",
+   "nivel": 28289.19,
+   "suben": [
+    [
+     "Advanced Micro Devices",
+     5.86
+    ],
+    [
+     "Broadcom",
+     5.54
+    ],
+    [
+     "Constellation Energy",
+     2.79
+    ]
+   ],
+   "valores": 101,
+   "var_pct": -0.3
+  },
+  "spx": {
+   "al_alza": 124,
+   "avisos": [],
+   "bajan": [
+    [
+     "Global Payments",
+     -12.01
+    ],
+    [
+     "Supermicro",
+     -11.3
+    ],
+    [
+     "Keurig Dr Pepper",
+     -7.4
+    ]
+   ],
+   "fecha_cierre": "2026-11-12",
+   "frase": "Sesión de ligeras caídas: 124 de 503 valores cerraron al alza y Global Payments (-12,01%) fue el más castigado.",
+   "nivel": 7592.4,
+   "suben": [
+    [
+     "Advanced Micro Devices",
+     5.86
+    ],
+    [
+     "Broadcom",
+     5.54
+    ],
+    [
+     "Arista Networks",
+     5.06
+    ]
+   ],
+   "valores": 503,
+   "var_pct": -0.354
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-12",
+   "frase": null,
+   "nivel": 6398.98,
+   "suben": [],
+   "valores": null,
+   "var_pct": 0.087
+  }
  }
 }
