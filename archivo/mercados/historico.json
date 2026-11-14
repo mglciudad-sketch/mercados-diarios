@@ -836,5 +836,120 @@
    "valores": null,
    "var_pct": 0.087
   }
+ },
+ "2026-11-14": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-13",
+   "frase": null,
+   "nivel": 20020.1,
+   "suben": [],
+   "valores": null,
+   "var_pct": 0.273
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-13",
+   "frase": "Sesión de ligeras caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4852.0,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.378
+  },
+  "ndx": {
+   "al_alza": 44,
+   "avisos": [],
+   "bajan": [
+    [
+     "Nebius Group N.V.",
+     -9.92
+    ],
+    [
+     "Advanced Micro Devices",
+     -8.75
+    ],
+    [
+     "Cisco",
+     -6.24
+    ]
+   ],
+   "fecha_cierre": "2026-11-13",
+   "frase": "Sesión negativa: 44 de 101 valores cerraron al alza y Nebius Group N.V. (-9,92%) fue el más castigado.",
+   "nivel": 27943.74,
+   "suben": [
+    [
+     "Alnylam Pharmaceuticals, Inc.",
+     5.36
+    ],
+    [
+     "AppLovin",
+     3.92
+    ],
+    [
+     "Airbnb",
+     3.12
+    ]
+   ],
+   "valores": 101,
+   "var_pct": -1.221
+  },
+  "spx": {
+   "al_alza": 315,
+   "avisos": [],
+   "bajan": [
+    [
+     "Advanced Micro Devices",
+     -8.75
+    ],
+    [
+     "Dell Technologies",
+     -7.18
+    ],
+    [
+     "Cisco",
+     -6.24
+    ]
+   ],
+   "fecha_cierre": "2026-11-13",
+   "frase": "Sesión de ligeras caídas: 315 de 503 valores cerraron al alza y Advanced Micro Devices (-8,75%) fue el más castigado.",
+   "nivel": 7561.67,
+   "suben": [
+    [
+     "Charter Communications",
+     4.32
+    ],
+    [
+     "Steris",
+     4.29
+    ],
+    [
+     "Global Payments",
+     4.21
+    ]
+   ],
+   "valores": 503,
+   "var_pct": -0.405
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-13",
+   "frase": null,
+   "nivel": 6386.86,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.189
+  }
  }
 }
