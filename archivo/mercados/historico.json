@@ -951,5 +951,169 @@
    "valores": null,
    "var_pct": -0.189
   }
+ },
+ "2026-11-16": {
+  "ibex": {
+   "al_alza": 18,
+   "avisos": [],
+   "bajan": [
+    [
+     "Acciona",
+     -7.98
+    ],
+    [
+     "Acciona Energía",
+     -6.89
+    ],
+    [
+     "Solaria",
+     -3.7
+    ]
+   ],
+   "fecha_cierre": "2026-11-13",
+   "frase": "Sesión de ligeras subidas: 18 de 35 valores cerraron al alza y Repsol (+3,31%) fue el que más subió.",
+   "nivel": 20020.1,
+   "suben": [
+    [
+     "Repsol",
+     3.31
+    ],
+    [
+     "Redeia Corporación",
+     2.9
+    ],
+    [
+     "Endesa",
+     1.64
+    ]
+   ],
+   "valores": 35,
+   "var_pct": 0.273
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-13",
+   "frase": "Sesión de ligeras caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4852.0,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.378
+  },
+  "ndx": {
+   "al_alza": 44,
+   "avisos": [],
+   "bajan": [
+    [
+     "Nebius Group N.V.",
+     -9.92
+    ],
+    [
+     "Advanced Micro Devices",
+     -8.75
+    ],
+    [
+     "Cisco",
+     -6.24
+    ]
+   ],
+   "fecha_cierre": "2026-11-13",
+   "frase": "Sesión negativa: 44 de 101 valores cerraron al alza y Nebius Group N.V. (-9,92%) fue el más castigado.",
+   "nivel": 27943.74,
+   "suben": [
+    [
+     "Alnylam Pharmaceuticals, Inc.",
+     5.36
+    ],
+    [
+     "AppLovin",
+     3.92
+    ],
+    [
+     "Airbnb",
+     3.12
+    ]
+   ],
+   "valores": 101,
+   "var_pct": -1.221
+  },
+  "spx": {
+   "al_alza": 315,
+   "avisos": [],
+   "bajan": [
+    [
+     "Advanced Micro Devices",
+     -8.75
+    ],
+    [
+     "Dell Technologies",
+     -7.18
+    ],
+    [
+     "Cisco",
+     -6.24
+    ]
+   ],
+   "fecha_cierre": "2026-11-13",
+   "frase": "Sesión de ligeras caídas: 315 de 503 valores cerraron al alza y Advanced Micro Devices (-8,75%) fue el más castigado.",
+   "nivel": 7561.67,
+   "suben": [
+    [
+     "Charter Communications",
+     4.32
+    ],
+    [
+     "Steris",
+     4.29
+    ],
+    [
+     "Global Payments",
+     4.21
+    ]
+   ],
+   "valores": 503,
+   "var_pct": -0.405
+  },
+  "sx5e": {
+   "al_alza": 28,
+   "avisos": [],
+   "bajan": [
+    [
+     "Nokia",
+     -4.5
+    ],
+    [
+     "Infineon Technologies",
+     -4.29
+    ],
+    [
+     "ASML Holding",
+     -2.76
+    ]
+   ],
+   "fecha_cierre": "2026-11-13",
+   "frase": "Sesión de ligeras caídas: 28 de 50 valores cerraron al alza y Nokia (-4,50%) fue el más castigado.",
+   "nivel": 6386.86,
+   "suben": [
+    [
+     "Ahold Delhaize",
+     2.12
+    ],
+    [
+     "Eni",
+     1.98
+    ],
+    [
+     "TotalEnergies",
+     1.91
+    ]
+   ],
+   "valores": 50,
+   "var_pct": -0.189
+  }
  }
 }
