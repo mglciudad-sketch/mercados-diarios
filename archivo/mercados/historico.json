@@ -1115,5 +1115,121 @@
    "valores": 50,
    "var_pct": -0.189
   }
+ },
+ "2026-11-17": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-16",
+   "frase": null,
+   "nivel": 19946.6,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.367
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-16",
+   "frase": "Jornada de fuertes caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4773.3,
+   "suben": [],
+   "valores": null,
+   "var_pct": -1.622
+  },
+  "ndx": {
+   "al_alza": 21,
+   "avisos": [],
+   "bajan": [
+    [
+     "Astera Labs, Inc.",
+     -8.79
+    ],
+    [
+     "Sandisk",
+     -8.58
+    ],
+    [
+     "Lumentum",
+     -8.48
+    ]
+   ],
+   "fecha_cierre": "2026-11-16",
+   "frase": "Jornada de fuertes caídas: 21 de 101 valores cerraron al alza y Astera Labs, Inc. (-8,79%) fue el más castigado.",
+   "nivel": 27197.15,
+   "suben": [
+    [
+     "Starbucks",
+     2.14
+    ],
+    [
+     "Paychex",
+     1.81
+    ],
+    [
+     "Comcast",
+     1.75
+    ]
+   ],
+   "valores": 101,
+   "var_pct": -2.672
+  },
+  "spx": {
+   "al_alza": 145,
+   "avisos": [],
+   "bajan": [
+    [
+     "Sandisk",
+     -8.58
+    ],
+    [
+     "Lumentum",
+     -8.48
+    ],
+    [
+     "Ciena",
+     -8.19
+    ]
+   ],
+   "fecha_cierre": "2026-11-16",
+   "frase": "Jornada de fuertes caídas: 145 de 503 valores cerraron al alza y Sandisk (-8,58%) fue el más castigado.",
+   "nivel": 7416.59,
+   "suben": [
+    [
+     "Tyson Foods",
+     8.72
+    ],
+    [
+     "Centene Corporation",
+     4.91
+    ],
+    [
+     "Tractor Supply",
+     4.12
+    ]
+   ],
+   "valores": 503,
+   "var_pct": -1.919
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-16",
+   "frase": null,
+   "nivel": 6348.35,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.603
+  }
  }
 }
