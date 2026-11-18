@@ -1231,5 +1231,121 @@
    "valores": null,
    "var_pct": -0.603
   }
+ },
+ "2026-11-18": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-17",
+   "frase": null,
+   "nivel": 19625.3,
+   "suben": [],
+   "valores": null,
+   "var_pct": -1.611
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-17",
+   "frase": "Sesión negativa para la bolsa mundial en su conjunto.",
+   "nivel": 4716.7,
+   "suben": [],
+   "valores": null,
+   "var_pct": -1.186
+  },
+  "ndx": {
+   "al_alza": 23,
+   "avisos": [],
+   "bajan": [
+    [
+     "Intuit",
+     -7.17
+    ],
+    [
+     "Strategy Inc",
+     -6.34
+    ],
+    [
+     "Workday, Inc.",
+     -5.8
+    ]
+   ],
+   "fecha_cierre": "2026-11-17",
+   "frase": "Sesión negativa: 23 de 101 valores cerraron al alza y Intuit (-7,17%) fue el más castigado.",
+   "nivel": 27001.78,
+   "suben": [
+    [
+     "Arm Holdings plc",
+     4.76
+    ],
+    [
+     "Astera Labs, Inc.",
+     4.58
+    ],
+    [
+     "Space Exploration Technologies Corp.",
+     3.16
+    ]
+   ],
+   "valores": 101,
+   "var_pct": -0.718
+  },
+  "spx": {
+   "al_alza": 75,
+   "avisos": [],
+   "bajan": [
+    [
+     "Salesforce",
+     -9.45
+    ],
+    [
+     "Intuit",
+     -7.17
+    ],
+    [
+     "ServiceNow",
+     -6.51
+    ]
+   ],
+   "fecha_cierre": "2026-11-17",
+   "frase": "Sesión negativa: 75 de 503 valores cerraron al alza y Salesforce (-9,45%) fue el más castigado.",
+   "nivel": 7340.53,
+   "suben": [
+    [
+     "Comfort Systems USA",
+     3.91
+    ],
+    [
+     "Coherent Corp.",
+     3.65
+    ],
+    [
+     "Ciena",
+     2.82
+    ]
+   ],
+   "valores": 503,
+   "var_pct": -1.026
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-17",
+   "frase": null,
+   "nivel": 6212.11,
+   "suben": [],
+   "valores": null,
+   "var_pct": -2.146
+  }
  }
 }
