@@ -1347,5 +1347,134 @@
    "valores": null,
    "var_pct": -2.146
   }
+ },
+ "2026-11-19": {
+  "ibex": {
+   "al_alza": 0,
+   "avisos": [
+    "IBEX 35: ranking calculado con 11 de 35 valores (faltan datos de algunos)."
+   ],
+   "bajan": [
+    [
+     "Repsol",
+     -6.42
+    ],
+    [
+     "Indra",
+     -4.19
+    ],
+    [
+     "Telefónica",
+     -2.56
+    ]
+   ],
+   "fecha_cierre": "2026-11-18",
+   "frase": "Sesión negativa: 0 de 11 valores cerraron al alza y Repsol (-6,42%) fue el más castigado.",
+   "nivel": 19373.3,
+   "suben": [],
+   "valores": 11,
+   "var_pct": -1.284
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-18",
+   "frase": "Sesión de ligeras caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4693.4,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.494
+  },
+  "ndx": {
+   "al_alza": 48,
+   "avisos": [],
+   "bajan": [
+    [
+     "Strategy Inc",
+     -6.4
+    ],
+    [
+     "Moderna",
+     -4.84
+    ],
+    [
+     "Alnylam Pharmaceuticals, Inc.",
+     -4.54
+    ]
+   ],
+   "fecha_cierre": "2026-11-18",
+   "frase": "Sesión de ligeras subidas: 48 de 101 valores cerraron al alza y Palo Alto Networks (+9,90%) fue el que más subió.",
+   "nivel": 27116.26,
+   "suben": [
+    [
+     "Palo Alto Networks",
+     9.9
+    ],
+    [
+     "CrowdStrike",
+     7.95
+    ],
+    [
+     "Take-Two Interactive",
+     6.22
+    ]
+   ],
+   "valores": 101,
+   "var_pct": 0.424
+  },
+  "spx": {
+   "al_alza": 237,
+   "avisos": [],
+   "bajan": [
+    [
+     "Humana",
+     -12.98
+    ],
+    [
+     "UnitedHealth Group",
+     -10.21
+    ],
+    [
+     "Elevance Health",
+     -7.63
+    ]
+   ],
+   "fecha_cierre": "2026-11-18",
+   "frase": "Sesión de ligeras caídas: 237 de 503 valores cerraron al alza y Humana (-12,98%) fue el más castigado.",
+   "nivel": 7323.63,
+   "suben": [
+    [
+     "Okta, Inc.",
+     12.07
+    ],
+    [
+     "Palo Alto Networks",
+     9.9
+    ],
+    [
+     "Generac",
+     9.87
+    ]
+   ],
+   "valores": 503,
+   "var_pct": -0.23
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-18",
+   "frase": null,
+   "nivel": 6154.39,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.929
+  }
  }
 }
