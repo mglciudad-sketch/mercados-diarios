@@ -1476,5 +1476,125 @@
    "valores": null,
    "var_pct": -0.929
   }
+ },
+ "2026-11-20": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-19",
+   "frase": null,
+   "nivel": 19186.2,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.966
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-19",
+   "frase": "Jornada de fuertes caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4613.6,
+   "suben": [],
+   "valores": null,
+   "var_pct": -1.7
+  },
+  "ndx": {
+   "al_alza": 6,
+   "avisos": [
+    "Nasdaq 100: ranking calculado con 75 de 101 valores (faltan datos de algunos)."
+   ],
+   "bajan": [
+    [
+     "Advanced Micro Devices",
+     -7.72
+    ],
+    [
+     "Marvell Technology",
+     -4.86
+    ],
+    [
+     "MercadoLibre, Inc.",
+     -4.75
+    ]
+   ],
+   "fecha_cierre": "2026-11-19",
+   "frase": "Jornada de fuertes caídas: 6 de 75 valores cerraron al alza y Advanced Micro Devices (-7,72%) fue el más castigado.",
+   "nivel": 26517.05,
+   "suben": [
+    [
+     "Western Digital",
+     2.98
+    ],
+    [
+     "Axon Enterprise",
+     2.09
+    ],
+    [
+     "Intel",
+     1.92
+    ]
+   ],
+   "valores": 75,
+   "var_pct": -2.21
+  },
+  "spx": {
+   "al_alza": 32,
+   "avisos": [
+    "S&P 500: ranking calculado con 435 de 503 valores (faltan datos de algunos)."
+   ],
+   "bajan": [
+    [
+     "Williams-Sonoma, Inc.",
+     -15.16
+    ],
+    [
+     "Advanced Micro Devices",
+     -7.72
+    ],
+    [
+     "Fiserv",
+     -6.38
+    ]
+   ],
+   "fecha_cierre": "2026-11-19",
+   "frase": "Jornada de fuertes caídas: 32 de 435 valores cerraron al alza y Williams-Sonoma, Inc. (-15,16%) fue el más castigado.",
+   "nivel": 7175.83,
+   "suben": [
+    [
+     "Western Digital",
+     2.98
+    ],
+    [
+     "Expeditors International",
+     2.26
+    ],
+    [
+     "Axon Enterprise",
+     2.09
+    ]
+   ],
+   "valores": 435,
+   "var_pct": -2.018
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-19",
+   "frase": null,
+   "nivel": 6113.86,
+   "suben": [],
+   "valores": null,
+   "var_pct": -0.659
+  }
  }
 }
