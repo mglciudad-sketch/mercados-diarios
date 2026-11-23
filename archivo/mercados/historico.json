@@ -1737,5 +1737,169 @@
    "valores": null,
    "var_pct": -2.812
   }
+ },
+ "2026-11-23": {
+  "ibex": {
+   "al_alza": 7,
+   "avisos": [],
+   "bajan": [
+    [
+     "ArcelorMittal",
+     -5.66
+    ],
+    [
+     "Laboratorios Rovi [es]",
+     -4.54
+    ],
+    [
+     "ACS",
+     -4.5
+    ]
+   ],
+   "fecha_cierre": "2026-11-20",
+   "frase": "Jornada de fuertes caídas: 7 de 35 valores cerraron al alza y ArcelorMittal (-5,66%) fue el más castigado.",
+   "nivel": 18873.1,
+   "suben": [
+    [
+     "Redeia Corporación",
+     1.76
+    ],
+    [
+     "Enagás",
+     0.8
+    ],
+    [
+     "Iberdrola",
+     0.35
+    ]
+   ],
+   "valores": 35,
+   "var_pct": -1.632
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI World: había un dato intradía de hoy; se ha descartado y se muestra el último cierre.",
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-20",
+   "frase": "Jornada de fuertes caídas para la bolsa mundial en su conjunto.",
+   "nivel": 4460.1,
+   "suben": [],
+   "valores": null,
+   "var_pct": -3.327
+  },
+  "ndx": {
+   "al_alza": 19,
+   "avisos": [],
+   "bajan": [
+    [
+     "Nebius Group N.V.",
+     -16.11
+    ],
+    [
+     "Sandisk",
+     -16.05
+    ],
+    [
+     "Astera Labs, Inc.",
+     -14.77
+    ]
+   ],
+   "fecha_cierre": "2026-11-20",
+   "frase": "Jornada de fuertes caídas: 19 de 101 valores cerraron al alza y Nebius Group N.V. (-16,11%) fue el más castigado.",
+   "nivel": 25028.98,
+   "suben": [
+    [
+     "T-Mobile US",
+     1.89
+    ],
+    [
+     "Walmart",
+     1.52
+    ],
+    [
+     "Keurig Dr Pepper",
+     1.25
+    ]
+   ],
+   "valores": 101,
+   "var_pct": -5.612
+  },
+  "spx": {
+   "al_alza": 123,
+   "avisos": [],
+   "bajan": [
+    [
+     "Bloom Energy",
+     -15.3
+    ],
+    [
+     "Nvidia",
+     -14.01
+    ],
+    [
+     "Lumentum",
+     -13.94
+    ]
+   ],
+   "fecha_cierre": "2026-11-20",
+   "frase": "Jornada de fuertes caídas: 123 de 502 valores cerraron al alza y Bloom Energy (-15,30%) fue el más castigado.",
+   "nivel": 6910.39,
+   "suben": [
+    [
+     "Global Payments",
+     9.95
+    ],
+    [
+     "General Mills",
+     3.65
+    ],
+    [
+     "McCormick & Company",
+     3.43
+    ]
+   ],
+   "valores": 502,
+   "var_pct": -3.699
+  },
+  "sx5e": {
+   "al_alza": 7,
+   "avisos": [],
+   "bajan": [
+    [
+     "ASML Holding",
+     -9.33
+    ],
+    [
+     "Nokia",
+     -8.88
+    ],
+    [
+     "Infineon Technologies",
+     -7.91
+    ]
+   ],
+   "fecha_cierre": "2026-11-20",
+   "frase": "Jornada de fuertes caídas: 7 de 50 valores cerraron al alza y ASML Holding (-9,33%) fue el más castigado.",
+   "nivel": 5941.95,
+   "suben": [
+    [
+     "Sanofi",
+     1.35
+    ],
+    [
+     "Deutsche Telekom",
+     1.15
+    ],
+    [
+     "Munich Re",
+     0.9
+    ]
+   ],
+   "valores": 50,
+   "var_pct": -2.812
+  }
  }
 }
