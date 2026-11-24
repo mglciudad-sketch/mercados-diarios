@@ -1901,5 +1901,120 @@
    "valores": 50,
    "var_pct": -2.812
   }
+ },
+ "2026-11-24": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-23",
+   "frase": null,
+   "nivel": 19181.1,
+   "suben": [],
+   "valores": null,
+   "var_pct": 1.632
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-23",
+   "frase": "Jornada de fuertes subidas para la bolsa mundial en su conjunto.",
+   "nivel": 4621.4,
+   "suben": [],
+   "valores": null,
+   "var_pct": 3.617
+  },
+  "ndx": {
+   "al_alza": 90,
+   "avisos": [],
+   "bajan": [
+    [
+     "CrowdStrike",
+     -8.92
+    ],
+    [
+     "Monster Beverage",
+     -2.88
+    ],
+    [
+     "Diamondback Energy",
+     -1.45
+    ]
+   ],
+   "fecha_cierre": "2026-11-23",
+   "frase": "Jornada de fuertes subidas: 90 de 100 valores cerraron al alza y Nvidia (+31,48%) fue el que más subió.",
+   "nivel": 26746.1,
+   "suben": [
+    [
+     "Nvidia",
+     31.48
+    ],
+    [
+     "Astera Labs, Inc.",
+     23.16
+    ],
+    [
+     "CoreWeave, Inc.",
+     22.32
+    ]
+   ],
+   "valores": 100,
+   "var_pct": 6.861
+  },
+  "spx": {
+   "al_alza": 418,
+   "avisos": [],
+   "bajan": [
+    [
+     "CrowdStrike",
+     -8.92
+    ],
+    [
+     "International Paper",
+     -4.55
+    ],
+    [
+     "Elevance Health",
+     -3.78
+    ]
+   ],
+   "fecha_cierre": "2026-11-23",
+   "frase": "Jornada de fuertes subidas: 418 de 502 valores cerraron al alza y Nvidia (+31,48%) fue el que más subió.",
+   "nivel": 7237.17,
+   "suben": [
+    [
+     "Nvidia",
+     31.48
+    ],
+    [
+     "Dell Technologies",
+     20.46
+    ],
+    [
+     "Micron Technology",
+     19.04
+    ]
+   ],
+   "valores": 502,
+   "var_pct": 4.729
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-23",
+   "frase": null,
+   "nivel": 6074.47,
+   "suben": [],
+   "valores": null,
+   "var_pct": 2.23
+  }
  }
 }
