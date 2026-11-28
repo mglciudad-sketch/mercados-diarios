@@ -2364,5 +2364,120 @@
    "valores": null,
    "var_pct": 2.041
   }
+ },
+ "2026-11-28": {
+  "ibex": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del IBEX 35."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-27",
+   "frase": null,
+   "nivel": 19386.6,
+   "suben": [],
+   "valores": null,
+   "var_pct": 1.725
+  },
+  "msci": {
+   "al_alza": null,
+   "avisos": [
+    "MSCI no publica gratis la composición diaria de sus más de 1.300 valores, así que este bloque no incluye los que más suben y más bajan."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-27",
+   "frase": "Jornada de fuertes subidas para la bolsa mundial en su conjunto.",
+   "nivel": 4678.8,
+   "suben": [],
+   "valores": null,
+   "var_pct": 1.817
+  },
+  "ndx": {
+   "al_alza": 94,
+   "avisos": [],
+   "bajan": [
+    [
+     "Vertex Pharmaceuticals",
+     -5.24
+    ],
+    [
+     "Alnylam Pharmaceuticals, Inc.",
+     -1.23
+    ],
+    [
+     "Keurig Dr Pepper",
+     -0.51
+    ]
+   ],
+   "fecha_cierre": "2026-11-27",
+   "frase": "Jornada de fuertes subidas: 94 de 101 valores cerraron al alza y Sandisk (+15,96%) fue el que más subió.",
+   "nivel": 26726.39,
+   "suben": [
+    [
+     "Sandisk",
+     15.96
+    ],
+    [
+     "Astera Labs, Inc.",
+     8.67
+    ],
+    [
+     "Rocket Lab Corporation",
+     8.21
+    ]
+   ],
+   "valores": 101,
+   "var_pct": 2.609
+  },
+  "spx": {
+   "al_alza": 407,
+   "avisos": [],
+   "bajan": [
+    [
+     "Vertex Pharmaceuticals",
+     -5.24
+    ],
+    [
+     "Insulet Corporation",
+     -2.65
+    ],
+    [
+     "J.M. Smucker Company (The)",
+     -2.46
+    ]
+   ],
+   "fecha_cierre": "2026-11-27",
+   "frase": "Jornada de fuertes subidas: 407 de 502 valores cerraron al alza y Coherent Corp. (+14,07%) fue el que más subió.",
+   "nivel": 7297.49,
+   "suben": [
+    [
+     "Coherent Corp.",
+     14.07
+    ],
+    [
+     "Lumentum",
+     7.98
+    ],
+    [
+     "Seagate Technology",
+     7.9
+    ]
+   ],
+   "valores": 502,
+   "var_pct": 1.597
+  },
+  "sx5e": {
+   "al_alza": null,
+   "avisos": [
+    "No se han podido obtener de forma fiable los valores que más suben y más bajan del Euro Stoxx 50."
+   ],
+   "bajan": [],
+   "fecha_cierre": "2026-11-27",
+   "frase": null,
+   "nivel": 6089.2,
+   "suben": [],
+   "valores": null,
+   "var_pct": 1.238
+  }
  }
 }
